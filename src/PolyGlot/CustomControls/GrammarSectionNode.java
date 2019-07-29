@@ -23,6 +23,7 @@ import PolyGlot.ManagersCollections.GrammarManager;
 import PolyGlot.PGTUtil;
 import java.util.Enumeration;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -45,7 +46,7 @@ public class GrammarSectionNode extends DefaultMutableTreeNode {
     
     
     @Override
-    public Enumeration children() {
+    public Enumeration<TreeNode> children() {
         return super.children();
     }
     

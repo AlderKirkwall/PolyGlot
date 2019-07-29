@@ -468,7 +468,7 @@ public class PFontHandler {
         try (InputStream tmp = this.getClass().getResourceAsStream(PGTUtil.ButtonFontLocation)) {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ret = Font.createFont(Font.TRUETYPE_FONT, tmp);
-            ret = ret.deriveFont(new Float(12)); // default to size 12 font
+            ret = ret.deriveFont(12); // default to size 12 font
             if (ret != null) {
                 ge.registerFont(ret);
             }

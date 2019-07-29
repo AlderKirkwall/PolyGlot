@@ -447,8 +447,8 @@ public final class ScrDeclensionGenSetup extends PDialog {
         }
         InputMap ruleIm = lstRules.getInputMap();
         ActionMap ruleAm = lstRules.getActionMap();
-        ruleIm.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | mask), copyKey);
-        ruleIm.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | mask), pasteKey);
+        ruleIm.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | mask), copyKey);
+        ruleIm.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | mask), pasteKey);
         ruleAm.put(copyKey, ruleCopyAction);
         ruleAm.put(pasteKey, rulePasteAction);
 
