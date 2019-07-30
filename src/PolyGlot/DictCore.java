@@ -724,7 +724,7 @@ public class DictCore {
         try {
             conditionalBetaSetup();
             
-            Object preNimbusMenu = null;
+            //Object preNimbusMenu = null;
             boolean osIntegration = shouldUseOSInegration(args);
 
             if (osIntegration) {
@@ -734,23 +734,16 @@ public class DictCore {
                 System.setProperty("com.apple.mrj.application.apple.menu.about.name", PGTUtil.displayName);
             }
 
-            if (PGTUtil.isOSX() && osIntegration) {
-                preNimbusMenu = osintegration_mac.OSIntegration_Mac.setBlankAppleMenuBar();
+            if (PGTUtil.isOSX && osIntegration) {
+                // old piece of OSX integration... leaving intact for the moment in case it's needed later.
+                //preNimbusMenu = osintegration_mac.OSIntegration_Mac.setBlankAppleMenuBar();
 
+                // icon set early so it looks correct during loading
                 osintegration_mac.OSIntegration_Mac.setIcon(PGTUtil.polyGlotIcon.getImage());
-
-                Runnable scrAboutRun = new Runnable(){
-                    @Override
-                    public void run() {
-                        ScrAbout.run(new DictCore());
-                    }
-                };
-
-                osintegration_mac.OSIntegration_Mac.setAboutHandler(scrAboutRun);
             }
+            //final Object finalPreNimbusMenu = preNimbusMenu;
+            
             setupNimbus();
-
-            final Object finalPreNimbusMenu = preNimbusMenu;
 
             java.awt.EventQueue.invokeLater(() -> {
 
@@ -777,9 +770,10 @@ public class DictCore {
                             }
 
                             // runs additional integration if on OSX system
-                            if (PGTUtil.isOSX() && osIntegration) {
+                            if (PGTUtil.isOSX && osIntegration) {
                                 final ScrMainMenu staticScr = s;
-                                osintegration_mac.OSIntegration_Mac.integrateMacMenuBar(s.getJMenuBar(), finalPreNimbusMenu);
+                                // old piece of OSX integration... leaving intact for the moment in case it's needed later.
+                                //osintegration_mac.OSIntegration_Mac.integrateMacMenuBar(s.getJMenuBar(), finalPreNimbusMenu);
                                 osintegration_mac.OSIntegration_Mac.setQuitAction(new Runnable() {
                                     @Override
                                     public void run() {
@@ -795,7 +789,14 @@ public class DictCore {
                                     }
 
                                 });
-                            } else if (PGTUtil.isWindows() && osIntegration) {
+                                
+                                osintegration_mac.OSIntegration_Mac.setAboutHandler(new Runnable(){
+                                    @Override
+                                    public void run() {
+                                        ScrAbout.run(new DictCore());
+                                    }
+                                });
+                            } else if (PGTUtil.isWindows && osIntegration) {
                                 s.setIconImage(PGTUtil.polyGlotIcon.getImage());
                             }
                         } catch (ArrayIndexOutOfBoundsException e) {
@@ -861,8 +862,8 @@ public class DictCore {
         
         // Test for minimum version of Java (8)
         String jVer = System.getProperty("java.version");
-        if (jVer.startsWith("1.5") || jVer.startsWith("1.6") || jVer.startsWith("1.7")) {
-            startProblems += "Unable to start PolyGlot without Java 8 or higher.\n";
+        if (jVer.startsWith("1.5") || jVer.startsWith("1.6") || jVer.startsWith("1.7") || jVer.startsWith("1.8")) {
+            startProblems += "Unable to start PolyGlot without Java 9 or higher.\n";
         }
 
         // keep people from running PolyGlot from within a zip file...
@@ -877,9 +878,9 @@ public class DictCore {
             IOHandler.writeErrorLog(e);
             startProblems += "Unable to load Java FX. Download and install to use PolyGlot ";
             
-            if (PGTUtil.isOSX()) {
+            if (PGTUtil.isOSX) {
                 startProblems += "The default Java Virtual Machine for OSX does not include JFX. Please download from java.com/en/download/";
-            } else if (PGTUtil.isWindows()) {
+            } else if (PGTUtil.isWindows) {
                 startProblems += "The version of Java you are using does not include JFX.  Please download from java.com/en/download/";
             } else {
                 startProblems += "(JavaFX not included in some builds of Java for Linux).\n";

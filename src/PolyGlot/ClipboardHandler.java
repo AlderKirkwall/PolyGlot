@@ -30,7 +30,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.List;
-import sun.awt.image.MultiResolutionCachedImage;
+//import sun.awt.image.MultiResolutionCachedImage;
 
 public final class ClipboardHandler implements ClipboardOwner {
     private Transferable cachedContents;
@@ -118,16 +118,16 @@ public final class ClipboardHandler implements ClipboardOwner {
             }
         }
         
-        if (ret instanceof sun.awt.image.MultiResolutionCachedImage) {
-            MultiResolutionCachedImage mri = (MultiResolutionCachedImage) ret;
-            List<Image> images = mri.getResolutionVariants();
-            
-            if (images != null && images.size() > 0) {
-                ret = images.get(0);
-            } else {
-                throw new Exception("Unable to retrieve image from clipboard.");
-            }
-        }
+//        if (ret instanceof sun.awt.image.MultiResolutionCachedImage) {
+//            MultiResolutionCachedImage mri = (MultiResolutionCachedImage) ret;
+//            List<Image> images = mri.getResolutionVariants();
+//            
+//            if (images != null && images.size() > 0) {
+//                ret = images.get(0);
+//            } else {
+//                throw new Exception("Unable to retrieve image from clipboard.");
+//            }
+//        }
         
         return ret;
     }
