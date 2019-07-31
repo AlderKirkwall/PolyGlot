@@ -7,8 +7,14 @@ tmp_folder="PolyGlot"
 frontend="frontends/PolyGlot/PolyGlot Frontend/bin/Debug/PolyGlot Frontend.exe"
 example_lexicons="Example Lexicons"
 
-echo "Creating distribution package..."
+# Copies forward facing Java frontend (OS Management) into place, and 
+# the original PolyGlot.jar into a place where it can be accessed
+cp dist/PolyGlot.jar dist/lib/PolyGlot.jar
+rm dist/PolyGlot.jar
+cp dist_files/PolyGlotFrontend.jar dist/PolyGlot.jar
 
+# Copies Distribution version into proper place
+echo "Creating distribution package..."
 if [ -f "$dist_dest" ]
 then
     rm "${dist_dest}"
@@ -36,7 +42,7 @@ rm -r "${tmp_folder}"
 
 
 # Copies BETA version to relevant space to be uploaded via Google Drive
-
+echo "Creating BETA package..."
 file_dest="/Users/draque/Google Drive/Permanent_Share/PolyGlot_BETA.zip"
 file_orig="PolyGlot_BETA.zip"
 beta_warn_dest_1="dist/BETA_WARNING.txt"

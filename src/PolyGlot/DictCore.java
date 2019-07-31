@@ -722,8 +722,6 @@ public class DictCore {
      */
     public static void main(final String args[]) {
         try {
-            conditionalBetaSetup();
-            
             //Object preNimbusMenu = null;
             boolean osIntegration = shouldUseOSInegration(args);
 
@@ -744,6 +742,8 @@ public class DictCore {
             //final Object finalPreNimbusMenu = preNimbusMenu;
             
             setupNimbus();
+            
+            conditionalBetaSetup();
 
             java.awt.EventQueue.invokeLater(() -> {
 

@@ -40,9 +40,20 @@
     
     <target name="-post-jar" if="isMac">
         <exec executable="/bin/bash">
-        <arg value="post_build.sh"/>
+            <arg value="post_build_library.sh"/>
+        </exec>
+        <exec executable="/bin/bash">
+            <arg value="post_build.sh"/>
         </exec>
     </target>
+    
+    <target name="-post-clean" if="isWindows">
+        <echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
+        <echo message="!!!LIBRARY FOLDER NOT SET UP. CONSULT .sh SCRIPTS!!!"/>
+        <echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
+    </target>
+    
+    <!-- TODO: make the post library builder work for other systems as well... or maybe just do manually? -->
     
     <import file="nbproject/build-impl.xml"/>
     <!--
